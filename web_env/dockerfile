@@ -1,0 +1,29 @@
+FROM ubuntu:16.04 
+
+MAINTAINER 4t10n <act01n@163.com>
+ENV DEBIAN_FRONTEND noninteractive 
+
+RUN sed -i 's/archive.ubuntu.com/mirrors.ustc.edu.cn/g' /etc/apt/sources.list
+
+RUN apt-get update -y && \ 
+    apt-get install -y software-properties-common  && \ 
+    apt-get install -y python-software-properties  && \ 
+    apt-get install -y apache2 \
+    vim \
+    tar \
+    php7.0-fpm \
+    php7.0-mcrypt \ 
+    php7.0-mysql  \ 
+    mysql-client \
+    mysql-server   && \
+    apt-get install -y zsh && \ 
+    apt-get install -y git  \
+    && /etc/init.d/mysql start \
+    && apt-get install -y wget \
+    && mysqladmin -uroot password root  
+
+
+COPY  ./start.sh  /tmp/
+
+
+
